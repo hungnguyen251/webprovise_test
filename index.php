@@ -30,8 +30,11 @@ class Cost
         //Get price in travels api and calculate cost for company
         foreach ($travelList as $travel) {
             $companyId = isset($travel['companyId']) ? strval($travel['companyId']) : '';
-            $companyCost[$companyId] = 0;
             $price = isset($travel['price']) ? floatval($travel['price']) : 0;
+
+            if (!isset($companyCost[$companyId])) {
+                $companyCost[$companyId] = 0;
+            }
 
             $companyCost[$companyId] += $price;
         }
